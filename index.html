@@ -203,7 +203,7 @@
               listaErros = validationError;
               retornoValidacao.innerHTML += `<p style="color: red;"><b>Foram encontrados erros no arquivo CSV:</b></p>`;
               retornoValidacao.innerHTML += `<p>Total de erros no arquivo: ${validationError.length}</p>`;
-              retornoValidacao.innerHTML += `<p><button type="button" id="exportaErros" onclick="exportaErros(this);" class="btn btn-link">Clique aqui para baixar um arquivo com todos os erros.</button></p>`;
+              retornoValidacao.innerHTML += `<p><a id="exportaErros" onclick="exportaErros(this);" class="btn btn-link">Clique aqui para baixar um arquivo com todos os erros.</a></p>`;
               retornoValidacao.innerHTML += `<p><b>Primeiras 50 linhas com erros identificados:</b></p>`;
   
               // Exibe no máximo os 50 primeiros erros, por questao de performace do navegador.
@@ -303,11 +303,12 @@
       // ## INICIO DEMAIS FUNCOES USADAS NA PAGINA
       // Baixa o arquivo com todos os erros identificados
       function exportaErros(el) {
-        var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(listaErros));
+        var obj = listaErros;
+        var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(obj,undefined,2));
         el.setAttribute("href", "data:"+data);
-        el.setAttribute("download", "erros.json");
+        el.setAttribute("download", "erros_csv.json");
       };
-  
+
       // Troca de abas na pagina
       function openPage(pageName, elmnt) {
         // Hide all elements with class="tab-content" by default */
